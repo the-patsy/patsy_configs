@@ -58,25 +58,13 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
-# change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
-
-# alternatively, you can use the cursor keys:
+# Using arrow keys to change focus 
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
-
-# alternatively, you can use the cursor keys:
+# Move windows with shift+arrow
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
@@ -110,16 +98,16 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws1 "1:Terminal"
+set $ws2 "2:Browser"
+set $ws3 "3:Email"
+set $ws4 "4:Discord"
+set $ws5 "5:Spotify"
+set $ws6 "6:Steam"
+set $ws7 "7:VM"
+set $ws8 "8:"
+set $ws9 "9:"
+set $ws10 "10:Notes"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -179,21 +167,46 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Custom stuff added below (ignoring changes/deletions made above)
+
+# Window coloring
 # class                 border  backgr. text    indicator child_border
 client.focused          #88C0D0 #88C0D0 #2E3440 #88C0D0	  #88C0D0
 client.focused_inactive #4C566A #4C566A #ECEFF4 #4C566A   #4C566A
 client.unfocused        #4C566A #4C566A #ECEFF4 #4C566A   #4C566A
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-
 client.background       #ffffff
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Open flatpak steam
+bindsym $mod+g exec flatpak run com.valvesoftware.Steam
 
 # Open browser
 bindsym $mod+b exec brave-browser
 
-# Start polybar (pacman -S polybar)
+# Open Spotify
+bindsym $mod+m exec flatpak run com.spotify.Client
 
+# Open Discord
+bindsym $mod+i exec flatpak run com.discordapp.Discord
+
+# Open Obsidian
+bindsym $mod+o exec flatpak run md.obsidian.Obsidian
+
+# Flameshot
+bindsym Print exec flameshot gui
+
+# Start polybar (pacman -S polybar)
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Set the wallpaper on start
 exec_always feh --bg-fill $HOME/.config/i3/graphite.jpg
+
+# Move workspaces to the other monitor
+bindsym $mod+greater move workspace to output right
+bindsym $mod+less move workspace to output left
