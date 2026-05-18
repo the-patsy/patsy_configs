@@ -187,7 +187,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+g exec flatpak run com.valvesoftware.Steam
 
 # Open browser
-bindsym $mod+b exec brave-browser
+bindsym $mod+b exec brave
 
 # Open Spotify
 bindsym $mod+m exec flatpak run com.spotify.Client
@@ -196,7 +196,7 @@ bindsym $mod+m exec flatpak run com.spotify.Client
 bindsym $mod+i exec flatpak run com.discordapp.Discord
 
 # Open Obsidian
-bindsym $mod+o exec flatpak run md.obsidian.Obsidian
+bindsym $mod+o exec obsidian
 
 # Flameshot
 bindsym Print exec flameshot gui
