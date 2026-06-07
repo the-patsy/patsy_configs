@@ -4,7 +4,6 @@
   # Bootloader (EFI — keep here since it's shared; LUKS moves to host)
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.networkmanager.enable = true;
 
@@ -65,7 +64,7 @@
     vim wget brave gimp vlc openvpn libreoffice kitty obsidian
     qemu_kvm virt-manager thunderbird git kdePackages.dolphin
     polybar gcc flameshot python3 p7zip zip mullvad pulseaudio htop
-    feh mangohud steam-run gparted
+    feh mangohud steam-run bsdgames gparted
   ];
 
 # Steam & Gaming

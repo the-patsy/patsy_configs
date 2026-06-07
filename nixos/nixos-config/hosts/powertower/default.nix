@@ -5,23 +5,23 @@
 
   networking.hostName = "powertower"; # Define your hostname.
 
+  boot.kernelPackages = pkgs.linuxPackages_6_1;
 hardware.graphics.enable = true;
 hardware.graphics.enable32Bit = true;  # needed for Steam on 64-bit systems
-
 # NVIDIA
 services.xserver.videoDrivers = [ "nvidia" ];
-
+nixpkgs.config.nvidia.acceptLicense = true;
 hardware.nvidia = {
   modesetting.enable = true;
   powerManagement.enable = false;
   open = false;          # use proprietary driver, not open-source kernel module
   nvidiaSettings = true;
-  package = config.boot.kernelPackages.nvidiaPackages.stable;
+  package = config.boot.kernelPackages.nvidiaPackages.legacy_535;
 };
 
 #HDD
 boot.initrd.luks.devices."HDD" = {
-  device = "/dev/disk/by-uuid/c13b1aa8-dcde-499b-900d-9f59856f4f63";
+  device = "/dev/disk/by-uuid/4f079a20-9b3f-49ed-8863-bbdb7638cabc";
   keyFile = "/etc/secrets/HDD.key";
   allowDiscards = true;
 };
