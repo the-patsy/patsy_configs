@@ -8,6 +8,6 @@ cd -
 cd /home/patsy/opt/homepage
 git pull
 cd -
-sudo nixos-rebuild switch --upgrade-all
+sudo nixos-rebuild switch --flake ~/home/path/to/#flake --upgrade-all
 sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations +5
 sudo nix-collect-garbage
