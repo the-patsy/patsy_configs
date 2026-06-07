@@ -8,6 +8,17 @@
 hardware.graphics.enable = true;
 hardware.graphics.enable32Bit = true;  # needed for Steam on 64-bit systems
 
+# NVIDIA
+services.xserver.videoDrivers = [ "nvidia" ];
+
+hardware.nvidia = {
+  modesetting.enable = true;
+  powerManagement.enable = false;
+  open = false;          # use proprietary driver, not open-source kernel module
+  nvidiaSettings = true;
+  package = config.boot.kernelPackages.nvidiaPackages.stable;
+};
+
 #HDD
 boot.initrd.luks.devices."HDD" = {
   device = "/dev/disk/by-uuid/c13b1aa8-dcde-499b-900d-9f59856f4f63";
