@@ -10,7 +10,9 @@ hardware.graphics.enable32Bit = true;  # needed for Steam on 64-bit systems
 
 #HDD
 boot.initrd.luks.devices."HDD" = {
-  device = "dev/disk/by-uuid/608da6ed-cb75-400b-ad6f-74379eefb4c1";
+  device = "/dev/disk/by-uuid/608da6ed-cb75-400b-ad6f-74379eefb4c1";
+  keyFile = "/etc/secrets/HDD.key";
+  allowDiscards = true;
 };
 
 #Mount
