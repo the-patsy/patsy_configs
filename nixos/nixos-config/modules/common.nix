@@ -93,7 +93,7 @@ programs.gamemode.enable = true;
       l  = "ls -alh";
       ll = "ls -l";
       ls = "ls --color=tty";
-      updateme = "bash /home/patsy/opt/patsy_configs/nixos/nix_updateme.sh";
+      updateme = "bash /home/patsy/.updateme.sh";
     };
   };
 
