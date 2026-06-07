@@ -7,4 +7,16 @@
   
 hardware.graphics.enable = true;
 hardware.graphics.enable32Bit = true;  # needed for Steam on 64-bit systems
+
+#HDD
+boot.initrd.luks.devices."HDD" = {
+  device = "dev/disk/by-uuid/608da6ed-cb75-400b-ad6f-74379eefb4c1";
+};
+
+#Mount
+fileSystems."/home/patsy/mnt/HDD" = {
+  device = "/dev/mapper/HDD";
+  fsType = "ext4";
+  options = [ "defaults" "nofail" ];
+};
 }
