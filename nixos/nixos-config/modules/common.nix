@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Bootloader (EFI — keep here since it's shared; LUKS moves to host)
@@ -65,7 +65,7 @@
     vim wget brave gimp vlc openvpn libreoffice kitty obsidian
     qemu_kvm virt-manager thunderbird git kdePackages.dolphin
     polybar gcc flameshot python3 p7zip zip mullvad pulseaudio htop
-    feh
+    feh mangohud steam-run
   ];
 
 # Steam & Gaming
@@ -81,12 +81,6 @@ programs.steam = {
 };
 
 programs.gamemode.enable = true;
-
-environment.systemPackages = with pkgs; [
-  # ... your existing packages ...
-  mangohud
-  steam-run
-];
 
   services.mullvad-vpn.enable = true;
   services.pipewire.pulse.enable = true;
