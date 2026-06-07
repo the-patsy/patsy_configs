@@ -65,7 +65,7 @@
     vim wget brave gimp vlc openvpn libreoffice kitty obsidian
     qemu_kvm virt-manager thunderbird git kdePackages.dolphin
     polybar gcc flameshot python3 p7zip zip mullvad pulseaudio htop
-    feh mangohud steam-run
+    feh mangohud steam-run gparted
   ];
 
 # Steam & Gaming
