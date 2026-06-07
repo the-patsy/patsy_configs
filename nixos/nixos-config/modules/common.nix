@@ -65,6 +65,7 @@
     vim wget brave gimp vlc openvpn libreoffice kitty obsidian
     qemu_kvm virt-manager thunderbird git kdePackages.dolphin
     polybar gcc flameshot python3 p7zip zip mullvad pulseaudio htop
+    feh steam lutris
   ];
 
   services.mullvad-vpn.enable = true;
