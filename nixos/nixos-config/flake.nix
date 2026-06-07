@@ -9,7 +9,7 @@
 
     nixosConfigurations = {
 
-      desktop = nixpkgs.lib.nixosSystem {
+      powertower = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./modules/common.nix
@@ -18,12 +18,12 @@
         ];
       };
 
-      laptop = nixpkgs.lib.nixosSystem {
+      s76 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./modules/common.nix
-          ./hosts/76/default.nix
-          ./hosts/76/hardware-configuration.nix
+          ./hosts/s76/default.nix
+          ./hosts/s76/hardware-configuration.nix
         ];
       };
 
