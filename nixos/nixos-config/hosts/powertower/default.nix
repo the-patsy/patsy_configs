@@ -5,7 +5,7 @@
 
   networking.hostName = "powertower"; # Define your hostname.
 
-  boot.kernelPackages = pkgs.linuxPackages_6_1;
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
 hardware.graphics.enable = true;
 hardware.graphics.enable32Bit = true;  # needed for Steam on 64-bit systems
 # NVIDIA
@@ -16,7 +16,7 @@ hardware.nvidia = {
   powerManagement.enable = false;
   open = false;          # use proprietary driver, not open-source kernel module
   nvidiaSettings = true;
-  package = config.boot.kernelPackages.nvidiaPackages.legacy_535;
+  package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
 };
 
 #HDD
