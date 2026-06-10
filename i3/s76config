@@ -105,7 +105,7 @@ set $ws4 "4:Discord"
 set $ws5 "5:Spotify"
 set $ws6 "6:Steam"
 set $ws7 "7:VM"
-set $ws8 "8:"
+set $ws8 "8:Office"
 set $ws9 "9:"
 set $ws10 "10:Notes"
 
@@ -184,16 +184,16 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Open flatpak steam
-bindsym $mod+g exec flatpak run com.valvesoftware.Steam
+bindsym $mod+g exec steam
 
 # Open browser
 bindsym $mod+b exec brave
 
 # Open Spotify
-bindsym $mod+m exec flatpak run com.spotify.Client
+#bindsym $mod+m exec flatpak run com.spotify.Client
 
 # Open Discord
-bindsym $mod+i exec flatpak run com.discordapp.Discord
+#bindsym $mod+i exec flatpak run com.discordapp.Discord
 
 # Open Obsidian
 bindsym $mod+o exec obsidian
