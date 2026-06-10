@@ -32,4 +32,7 @@ fileSystems."/home/patsy/mnt/HDD" = {
   fsType = "ext4";
   options = [ "defaults" "nofail" ];
 };
+
+# Fix DPI for Chromium
+services.xserver.dpi = 96;
 }
