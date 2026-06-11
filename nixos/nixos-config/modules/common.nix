@@ -39,7 +39,7 @@
   users.users.patsy = {
     isNormalUser = true;
     description = "patsy";
-    extraGroups = [ "networkmanager" "libvirtd" "wheel" ];
+    extraGroups = [ "networkmanager" "libvirtd" "wheel" "plugdev" ];
   };
 
   fonts.packages = with pkgs; [ nerd-fonts.hack ];
@@ -60,57 +60,63 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # Packages installed
   environment.systemPackages = with pkgs; [
     vim wget brave gimp vlc openvpn libreoffice kitty obsidian
     qemu_kvm virt-manager thunderbird git kdePackages.dolphin
     polybar gcc flameshot python3 p7zip zip mullvad pulseaudio htop
-    feh mangohud steam-run bsdgames xdpyinfo gparted
+    feh mangohud steam-run bsdgames xdpyinfo gparted yubikey-manager
+    yubioath-flutter usbutils
   ];
 
-# Steam & Gaming
-nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-  "steam"
-  "steam-unwrapped"
-];
+  # Yubikey
+  services.pcscd.enable = true;
+  services.udev.packages = [ pkgs.yubikey-personalization pkgs.libu2f-host ];
 
-programs.steam = {
-  enable = true;
-  extraCompatPackages = with pkgs; [ proton-ge-bin ];
-  gamescopeSession.enable = true;
-};
+  # Steam & Gaming
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "steam"
+    "steam-unwrapped"
+  ];
 
-programs.gamemode.enable = true;
-
-  services.mullvad-vpn.enable = true;
-  services.pipewire.pulse.enable = true;
-
-  environment.variables.SAL_USE_VCLPLUGIN = "gtk3";
-
-  programs.bash = {
+  programs.steam = {
     enable = true;
-    shellAliases = {
-      l  = "ls -alh";
-      ll = "ls -l";
-      ls = "ls --color=tty";
-      updateme = "bash /home/patsy/.updateme.sh";
+    extraCompatPackages = with pkgs; [ proton-ge-bin ];
+    gamescopeSession.enable = true;
+  };
+
+  programs.gamemode.enable = true;
+
+    services.mullvad-vpn.enable = true;
+    services.pipewire.pulse.enable = true;
+
+    environment.variables.SAL_USE_VCLPLUGIN = "gtk3";
+
+    programs.bash = {
+      enable = true;
+      shellAliases = {
+        l  = "ls -alh";
+        ll = "ls -l";
+        ls = "ls --color=tty";
+        updateme = "bash /home/patsy/.updateme.sh";
+      };
     };
-  };
 
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu.runAsRoot = false;
-  };
-  programs.virt-manager.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
+    virtualisation.libvirtd = {
+      enable = true;
+      qemu.runAsRoot = false;
+    };
+    programs.virt-manager.enable = true;
+    virtualisation.spiceUSBRedirection.enable = true;
 
-  security.polkit.enable = true;
-  security.polkit.extraConfig = ''
-    polkit.addRule(function(action, subject) {
-      if (action.id == "org.libvirt.unix.manage" && subject.isInGroup("libvirtd")) {
+    security.polkit.enable = true;
+    security.polkit.extraConfig = ''
+      polkit.addRule(function(action, subject) {
+        if (action.id == "org.libvirt.unix.manage" && subject.isInGroup("libvirtd")) {
         return polkit.Result.YES;
-      }
-    });
-  '';
+        }
+      });
+    '';
 
-  system.stateVersion = "25.11";
+    system.stateVersion = "25.11";
 }
