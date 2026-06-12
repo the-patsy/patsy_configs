@@ -26,7 +26,14 @@
           ./hosts/s76/hardware-configuration.nix
         ];
       };
-
+      ultra = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./modules/common.nix
+          ./hosts/ultra/default.nix
+          ./hosts/ultra/hardware-configuration.nix
+        ];
+      };
     };
   };
 }
