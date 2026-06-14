@@ -202,7 +202,7 @@ bindsym $mod+o exec obsidian
 bindsym Print exec flameshot gui
 
 # Fix monitors
-exec_always --no-startup-id sh -c 'sleep 20 && bash $HOME/.fixmonitor.sh'
+exec_always --no-startup-id sh -c 'sleep 5 && bash $HOME/.fixmonitor.sh'
 
 # Start polybar (pacman -S polybar)
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
