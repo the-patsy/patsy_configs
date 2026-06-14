@@ -58,13 +58,20 @@
     };
   };
 
+# Nixld
+programs.nix-ld = {
+  enable = true;
+  package = pkgs.nix-ld;
+  libraries = [ pkgs.glibc pkgs.libGL pkgs.libx11 pkgs.libxi pkgs.libxext pkgs.libxrandr pkgs.libxrender pkgs.libxcursor pkgs.libxinerama ]; # Add other needed libraries here
+};   
+
   nixpkgs.config.allowUnfree = true;
 
   # Packages installed
   environment.systemPackages = with pkgs; [
     vim wget brave gimp vlc openvpn libreoffice kitty obsidian
     qemu_kvm virt-manager thunderbird git kdePackages.dolphin
-    polybar gcc flameshot python3 p7zip zip mullvad pulseaudio htop
+    polybar gcc flameshot python3 p7zip unzip zip mullvad pulseaudio htop
     feh mangohud steam-run bsdgames xdpyinfo gparted yubikey-manager
     yubioath-flutter usbutils
   ];

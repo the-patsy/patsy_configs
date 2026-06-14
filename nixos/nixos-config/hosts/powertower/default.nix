@@ -32,4 +32,4 @@ fileSystems."/home/patsy/HDD" = {
   fsType = "btrfs";
   options = [ "defaults" "nofail" ];
   };
-}
+} 
