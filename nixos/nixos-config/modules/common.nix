@@ -73,7 +73,7 @@ programs.nix-ld = {
     qemu_kvm virt-manager thunderbird git kdePackages.dolphin
     polybar gcc flameshot python3 p7zip unzip zip mullvad pulseaudio htop
     feh mangohud steam-run bsdgames xdpyinfo gparted yubikey-manager
-    yubioath-flutter usbutils
+    yubioath-flutter usbutils mesa-demos lutris
   ];
 
   # Yubikey
