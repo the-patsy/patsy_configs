@@ -35,4 +35,9 @@ fileSystems."/home/patsy/mnt/HDD" = {
 
 # Fix DPI for Chromium
 services.xserver.dpi = 96;
+
+# KVM
+users.groups.kvm-storage = {};
+users.users.patsy.extraGroups = [ "kvm-storage" ];
+users.users.qemu-libvirtd.extraGroups = [ "kvm-storage" ];
 }
