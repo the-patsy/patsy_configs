@@ -5,7 +5,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.networkmanager.enable = true;
+  #PiHole
+  networking.networkmanager = {
+    enable = true;
+    insertNameservers = [ "192.168.1.113" "9.9.9.9" ];
+  };
 
   time.timeZone = "America/New_York";
 
@@ -73,7 +77,7 @@ programs.nix-ld = {
     qemu_kvm virt-manager thunderbird git kdePackages.dolphin
     polybar gcc flameshot python3 p7zip unzip zip mullvad pulseaudio htop
     feh mangohud steam-run bsdgames xdpyinfo gparted yubikey-manager
-    yubioath-flutter usbutils mesa-demos lutris
+    yubioath-flutter usbutils mesa-demos lutris bind
   ];
 
   # Yubikey
