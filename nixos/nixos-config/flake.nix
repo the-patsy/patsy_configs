@@ -5,35 +5,31 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs }: {
+  outputs = { self, nixpkgs }:
+    let
+      mkHost = { host, system ? "x86_64-linux", extraModules ? [] }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./modules/common.nix
+            ./hosts/${host}/default.nix
+          ] ++ extraModules;
+        };
+    in {
+      nixosConfigurations = {
+        # Normal configs — built into day-to-day use
+        powertower = mkHost { host = "powertower"; };
+        s76        = mkHost { host = "s76"; };
+        ultra      = mkHost { host = "ultra"; };
 
-    nixosConfigurations = {
+        # Gaming variants — only for hosts that make sense
+        powertower-gaming = mkHost { host = "powertower"; extraModules = [ ./modules/gaming.nix ]; };
+        s76-gaming        = mkHost { host = "s76";        extraModules = [ ./modules/gaming.nix ]; };
 
-      powertower = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./modules/common.nix
-          ./hosts/powertower/default.nix
-          ./hosts/powertower/hardware-configuration.nix
-        ];
-      };
-
-      s76 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./modules/common.nix
-          ./hosts/s76/default.nix
-          ./hosts/s76/hardware-configuration.nix
-        ];
-      };
-      ultra = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./modules/common.nix
-          ./hosts/ultra/default.nix
-          ./hosts/ultra/hardware-configuration.nix
-        ];
+        # Pentest variants — all three hosts
+        powertower-pentest = mkHost { host = "powertower"; extraModules = [ ./modules/pentest.nix ]; };
+        s76-pentest        = mkHost { host = "s76";        extraModules = [ ./modules/pentest.nix ]; };
+        ultra-pentest      = mkHost { host = "ultra";      extraModules = [ ./modules/pentest.nix ]; };
       };
     };
-  };
 }

@@ -1,13 +1,14 @@
 { config, pkgs, ... }:
 
 {
+  imports = [ ./hardware-configuration.nix ];
   boot.initrd.luks.devices."luks-38a4207f-6ae6-4333-8e9e-6d8cbe258ac0".device = "/dev/disk/by-uuid/38a4207f-6ae6-4333-8e9e-6d8cbe258ac0";
 
   networking.hostName = "powertower"; # Define your hostname.
 
   boot.kernelPackages = pkgs.linuxPackages_6_12;
-hardware.graphics.enable = true;
-hardware.graphics.enable32Bit = true;  # needed for Steam on 64-bit systems
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;  # needed for Steam on 64-bit systems
 # NVIDIA
 services.xserver.videoDrivers = [ "nvidia" ];
 nixpkgs.config.nvidia.acceptLicense = true;

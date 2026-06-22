@@ -13,6 +13,8 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  imports = [ ./hardware-configuration.nix ];
+
   fileSystems."/" =
     { device = "/dev/mapper/luks-9f5f5c3e-1d84-4622-b606-ce2fb4030811";
       fsType = "ext4";

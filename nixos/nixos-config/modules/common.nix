@@ -76,30 +76,20 @@ programs.nix-ld = {
     vim wget brave gimp vlc openvpn libreoffice kitty obsidian
     qemu_kvm virt-manager thunderbird git kdePackages.dolphin
     polybar gcc flameshot python3 p7zip unzip zip mullvad pulseaudio htop
-    feh mangohud steam-run bsdgames xdpyinfo gparted yubikey-manager
-    yubioath-flutter usbutils mesa-demos lutris bind coreutils winetricks
+    feh mangohud bsdgames xdpyinfo gparted yubikey-manager
+    yubioath-flutter usbutils mesa-demos bind coreutils winetricks vscodium
   ];
+
+  # Enable this by default. Supposedly just for steam.
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
 
   # Yubikey
   services.pcscd.enable = true;
   services.udev.packages = [ pkgs.yubikey-personalization pkgs.libu2f-host ];
 
-  # Steam & Gaming
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "steam"
-    "steam-unwrapped"
-  ];
-
-  programs.steam = {
-    enable = true;
-    extraCompatPackages = with pkgs; [ proton-ge-bin ];
-    gamescopeSession.enable = true;
-  };
-
-  programs.gamemode.enable = true;
-
-    services.mullvad-vpn.enable = true;
-    services.pipewire.pulse.enable = true;
+  services.mullvad-vpn.enable = true;
+  services.pipewire.pulse.enable = true;
 
     environment.variables.SAL_USE_VCLPLUGIN = "gtk3";
 
@@ -109,7 +99,8 @@ programs.nix-ld = {
         l  = "ls -alh";
         ll = "ls -l";
         ls = "ls --color=tty";
-        updateme = "bash /home/patsy/.updateme.sh";
+        pupdateme = "bash /home/patsy/.pupdateme.sh";
+        gupdateme = "bash /home/patsy/.gupdateme.sh";
       };
     };
 
