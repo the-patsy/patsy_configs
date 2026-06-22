@@ -76,7 +76,7 @@ programs.nix-ld = {
     vim wget brave gimp vlc openvpn libreoffice kitty obsidian
     qemu_kvm virt-manager thunderbird git kdePackages.dolphin
     polybar gcc flameshot python3 p7zip unzip zip mullvad pulseaudio htop
-    feh mangohud bsdgames xdpyinfo gparted yubikey-manager
+    feh mangohud bsdgames xdpyinfo gparted yubikey-manager networkmanagerapplet
     yubioath-flutter usbutils mesa-demos bind coreutils winetricks vscodium
   ];
 
