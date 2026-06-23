@@ -8,7 +8,6 @@
   #PiHole
   networking.networkmanager = {
     enable = true;
-    insertNameservers = [ "192.168.1.113" "192.168.1.107" ];
   };
 
   time.timeZone = "America/New_York";
