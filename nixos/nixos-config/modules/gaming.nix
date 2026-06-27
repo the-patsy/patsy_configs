@@ -16,6 +16,6 @@
   programs.gamemode.enable = true;
 
   environment.systemPackages = with pkgs; [
-    lutris winetricks mangohud
+    lutris wineWow64Packages.stable winetricks mangohud jstest-gtk
   ];
 }

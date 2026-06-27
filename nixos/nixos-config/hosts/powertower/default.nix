@@ -6,33 +6,44 @@
   users.users.patsy = {
   extraGroups = [ "input" "video" ];
 };
+
   networking.hostName = "powertower"; # Define your hostname.
 
   boot.kernelPackages = pkgs.linuxPackages_6_12;
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;  # needed for Steam on 64-bit systems
-# NVIDIA
-services.xserver.videoDrivers = [ "nvidia" ];
-nixpkgs.config.nvidia.acceptLicense = true;
-hardware.nvidia = {
-  modesetting.enable = true;
-  powerManagement.enable = false;
-  open = false;          # use proprietary driver, not open-source kernel module
-  nvidiaSettings = true;
-  package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
-};
 
-#HDD
-boot.initrd.luks.devices."HDD" = {
-  device = "/dev/disk/by-uuid/4f079a20-9b3f-49ed-8863-bbdb7638cabc";
-  keyFile = "/etc/secrets/HDD.key";
-  allowDiscards = true;
-};
+  # NVIDIA
+  services.xserver.videoDrivers = [ "nvidia" ];
+  nixpkgs.config.nvidia.acceptLicense = true;
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    open = false;          # use proprietary driver, not open-source kernel module
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+  };
 
-#Mount
-fileSystems."/home/patsy/HDD" = {
-  device = "/dev/mapper/HDD";
-  fsType = "btrfs";
-  options = [ "defaults" "nofail" ];
+  #HDD
+  boot.initrd.luks.devices."HDD" = {
+    device = "/dev/disk/by-uuid/4f079a20-9b3f-49ed-8863-bbdb7638cabc";
+    keyFile = "/etc/secrets/HDD.key";
+    allowDiscards = true;
+  };
+
+  # HOTAS Setup
+  services.udev.extraRules = ''
+  # VKB Gladiator EVO R - hidraw access for Wine/Proton
+  SUBSYSTEM=="hidraw", ATTRS{idVendor}=="231d", ATTRS{idProduct}=="0200", MODE="0660", GROUP="input"
+
+  # Thrustmaster TWCS Throttle - hidraw access for Wine/Proton
+  SUBSYSTEM=="hidraw", ATTRS{idVendor}=="044f", ATTRS{idProduct}=="b687", MODE="0660", GROUP="input"
+'';
+
+  #Mount
+  fileSystems."/home/patsy/HDD" = {
+    device = "/dev/mapper/HDD";
+    fsType = "btrfs";
+    options = [ "defaults" "nofail" ];
   };
 } 
