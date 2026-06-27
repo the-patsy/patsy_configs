@@ -74,9 +74,10 @@ programs.nix-ld = {
   environment.systemPackages = with pkgs; [
     vim wget brave gimp vlc openvpn libreoffice kitty obsidian
     qemu_kvm virt-manager thunderbird git kdePackages.dolphin
-    polybar gcc flameshot python3 p7zip unzip zip mullvad pulseaudio htop
-    feh mangohud bsdgames xdpyinfo gparted yubikey-manager networkmanagerapplet
-    yubioath-flutter usbutils mesa-demos bind coreutils winetricks vscodium
+    polybar gcc flameshot python3 p7zip unzip zip mullvad pulseaudio
+    htop feh mangohud bsdgames xdpyinfo gparted yubikey-manager
+    networkmanagerapplet yubioath-flutter usbutils mesa-demos bind
+    coreutils winetricks vscodium pavucontrol
   ];
 
   # Enable this by default. Supposedly just for steam.

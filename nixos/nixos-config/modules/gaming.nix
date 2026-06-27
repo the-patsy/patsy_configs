@@ -11,6 +11,7 @@
     extraCompatPackages = with pkgs; [ proton-ge-bin ];
     gamescopeSession.enable = true;
   };
+  hardware.steam-hardware.enable = true;
 
   programs.gamemode.enable = true;
 
