@@ -40,6 +40,16 @@
   SUBSYSTEM=="hidraw", ATTRS{idVendor}=="044f", ATTRS{idProduct}=="b687", MODE="0660", GROUP="input"
 '';
 
+  # VR Setup
+  security.rtkit.enable = true;
+
+  security.wrappers.vrcompositor-launcher = {
+    owner = "root";
+    group = "root";
+    capabilities = "cap_sys_nice+eip";
+    source = "/home/patsy/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
+  };
+
   #Mount
   fileSystems."/home/patsy/HDD" = {
     device = "/dev/mapper/HDD";
