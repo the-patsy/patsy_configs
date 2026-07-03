@@ -61,6 +61,10 @@
     };
   };
 
+
+#Firmware updater
+services.fwupd.enable = true;
+
 # Nixld
 programs.nix-ld = {
   enable = true;
