@@ -50,6 +50,9 @@
     source = "/home/patsy/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
   };
 
+  # Keyboard software
+  hardware.ckb-next.enable = true;
+
   #Mount
   fileSystems."/home/patsy/HDD" = {
     device = "/dev/mapper/HDD";
