@@ -62,15 +62,15 @@
   };
 
 
-#Firmware updater
-services.fwupd.enable = true;
+  #Firmware updater
+  services.fwupd.enable = true;
 
-# Nixld
-programs.nix-ld = {
-  enable = true;
-  package = pkgs.nix-ld;
-  libraries = [ pkgs.glibc pkgs.libGL pkgs.libx11 pkgs.libxi pkgs.libxext pkgs.libxrandr pkgs.libxrender pkgs.libxcursor pkgs.libxinerama ]; # Add other needed libraries here
-};   
+  # Nixld
+  programs.nix-ld = {
+    enable = true;
+    package = pkgs.nix-ld;
+    libraries = [ pkgs.glibc pkgs.libGL pkgs.libx11 pkgs.libxi pkgs.libxext pkgs.libxrandr pkgs.libxrender pkgs.libxcursor pkgs.libxinerama ]; # Add other needed libraries here
+  };   
 
   nixpkgs.config.allowUnfree = true;
 
@@ -83,6 +83,9 @@ programs.nix-ld = {
     networkmanagerapplet yubioath-flutter usbutils mesa-demos bind
     coreutils wine wine64 vscodium pavucontrol lsof
   ];
+
+  # Latest Kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Enable this by default. Supposedly just for steam.
   hardware.graphics.enable = true;

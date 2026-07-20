@@ -9,7 +9,6 @@
 
   networking.hostName = "powertower"; # Define your hostname.
 
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;  # needed for Steam on 64-bit systems
 
