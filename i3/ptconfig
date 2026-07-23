@@ -202,13 +202,16 @@ bindsym $mod+o exec obsidian
 bindsym Print exec flameshot gui
 
 # Fix monitors
-exec_always --no-startup-id sh -c 'sleep 5 && bash $HOME/.fixmonitor.sh'
+exec_always --no-startup-id sh -c 'sleep 3 && bash $HOME/.fixmonitor.sh'
 
 # Start polybar (pacman -S polybar)
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Set the wallpaper on start
 exec_always feh --bg-fill $HOME/.config/i3/graphite.jpg
+
+# Turn on keyboard lights
+exec_always --no-startup-id sh -c 'ckb-next -b'
 
 # Move workspaces to the other monitor
 bindsym $mod+greater move workspace to output right
