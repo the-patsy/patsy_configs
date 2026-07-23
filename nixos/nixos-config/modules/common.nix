@@ -78,11 +78,15 @@
   environment.systemPackages = with pkgs; [
     vim wget brave gimp vlc openvpn libreoffice kitty obsidian
     qemu_kvm virt-manager thunderbird git kdePackages.dolphin
-    polybar gcc flameshot python3 p7zip unzip zip mullvad pulseaudio
+    gcc flameshot python3 p7zip unzip zip mullvad pulseaudio
     htop feh mangohud bsdgames xdpyinfo gparted yubikey-manager
     networkmanagerapplet yubioath-flutter usbutils mesa-demos bind
     coreutils wine wine64 vscodium pavucontrol lsof
+    (polybar.override { pulseSupport = true; })
   ];
+
+  # Prevent pipewire audio issues(?)
+  security.rtkit.enable = true;
 
   # Latest Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
