@@ -64,12 +64,14 @@
 
   #Firmware updater
   services.fwupd.enable = true;
+  systemd.services.fwupd-refresh.enable = false;
+  systemd.timers.fwupd-refresh.enable = false;
 
   # Nixld
   programs.nix-ld = {
     enable = true;
     package = pkgs.nix-ld;
-    libraries = [ pkgs.glibc pkgs.libGL pkgs.libx11 pkgs.libxi pkgs.libxext pkgs.libxrandr pkgs.libxrender pkgs.libxcursor pkgs.libxinerama ]; # Add other needed libraries here
+    libraries = [ pkgs.glibc pkgs.libGL pkgs.libx11 pkgs.libxi pkgs.libxext pkgs.libxrandr pkgs.libxrender pkgs.libxcursor pkgs.libxinerama pkgs.glib pkgs.fontconfig pkgs.qt5.qtbase pkgs.qt5.qtwayland pkgs.freetype pkgs.zlib pkgs.libgpg-error pkgs.libxcb pkgs.stdenv.cc.cc.lib ]; # Add other needed libraries here
   };   
 
   nixpkgs.config.allowUnfree = true;
@@ -81,7 +83,7 @@
     gcc flameshot python3 p7zip unzip zip mullvad pulseaudio
     htop feh mangohud bsdgames xdpyinfo gparted yubikey-manager
     networkmanagerapplet yubioath-flutter usbutils mesa-demos bind
-    coreutils wine wine64 vscodium pavucontrol lsof
+    coreutils wine wine64 vscodium pavucontrol lsof bottles
     (polybar.override { pulseSupport = true; })
   ];
 
