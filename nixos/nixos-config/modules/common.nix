@@ -84,6 +84,7 @@
     htop feh mangohud bsdgames xdpyinfo gparted yubikey-manager
     networkmanagerapplet yubioath-flutter usbutils mesa-demos bind
     coreutils wine wine64 vscodium pavucontrol lsof bottles blender
+    discord
     (polybar.override { pulseSupport = true; })
   ];
 
