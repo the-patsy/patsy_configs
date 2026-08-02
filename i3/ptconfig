@@ -202,7 +202,7 @@ bindsym $mod+o exec obsidian
 bindsym Print exec flameshot gui
 
 # Fix monitors
-exec_always --no-startup-id sh -c 'sleep 3 && bash $HOME/.fixmonitor.sh'
+exec_always --no-startup-id xrandr --output DP-2 --mode 2560x1440 --rate 165 --output DP-3 --mode 2560x1440 --rate 165 --right-of DP-2
 
 # Start polybar (pacman -S polybar)
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
