@@ -9,39 +9,39 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/mapper/luks-2aac7f5d-fe4b-45e0-abe1-44f76426c3f1";
+    { device = "/dev/mapper/luks-71c88ff4-8f30-467a-8575-d1ab7a298a55";
       fsType = "btrfs";
     };
 
-  boot.initrd.luks.devices."luks-2aac7f5d-fe4b-45e0-abe1-44f76426c3f1".device = "/dev/disk/by-uuid/2aac7f5d-fe4b-45e0-abe1-44f76426c3f1";
+  boot.initrd.luks.devices."luks-71c88ff4-8f30-467a-8575-d1ab7a298a55".device = "/dev/disk/by-uuid/71c88ff4-8f30-467a-8575-d1ab7a298a55";
 
   fileSystems."/home" =
-    { device = "/dev/mapper/luks-2aac7f5d-fe4b-45e0-abe1-44f76426c3f1";
+    { device = "/dev/mapper/luks-71c88ff4-8f30-467a-8575-d1ab7a298a55";
       fsType = "btrfs";
       options = [ "subvol=home" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/mapper/luks-2aac7f5d-fe4b-45e0-abe1-44f76426c3f1";
+    { device = "/dev/mapper/luks-71c88ff4-8f30-467a-8575-d1ab7a298a55";
       fsType = "btrfs";
       options = [ "subvol=nix" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/EA32-ABD9";
+    { device = "/dev/disk/by-uuid/009E-1962";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
   swapDevices =
-    [ { device = "/dev/mapper/luks-38a4207f-6ae6-4333-8e9e-6d8cbe258ac0"; }
+    [ { device = "/dev/mapper/luks-2d89af70-98d7-4a9a-9f2e-47b5d52f9ae2"; }
     ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

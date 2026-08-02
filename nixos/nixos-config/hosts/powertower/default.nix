@@ -2,7 +2,7 @@
 
 {
   imports = [ ./hardware-configuration.nix ];
-  boot.initrd.luks.devices."luks-38a4207f-6ae6-4333-8e9e-6d8cbe258ac0".device = "/dev/disk/by-uuid/38a4207f-6ae6-4333-8e9e-6d8cbe258ac0";
+  boot.initrd.luks.devices."luks-71c88ff4-8f30-467a-8575-d1ab7a298a55".device = "/dev/disk/by-uuid/71c88ff4-8f30-467a-8575-d1ab7a298a55";
   users.users.patsy = {
   extraGroups = [ "input" "video" ];
 };
@@ -11,17 +11,6 @@
 
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;  # needed for Steam on 64-bit systems
-
-  # NVIDIA
-  services.xserver.videoDrivers = [ "nvidia" ];
-  nixpkgs.config.nvidia.acceptLicense = true;
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    open = false;          # use proprietary driver, not open-source kernel module
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
-  };
 
   #HDD
   boot.initrd.luks.devices."HDD" = {
@@ -32,22 +21,22 @@
 
   # HOTAS Setup
   services.udev.extraRules = ''
-  # VKB Gladiator EVO R - hidraw access for Wine/Proton
+   #VKB Gladiator EVO R - hidraw access for Wine/Proton
   SUBSYSTEM=="hidraw", ATTRS{idVendor}=="231d", ATTRS{idProduct}=="0200", MODE="0660", GROUP="input"
 
-  # Thrustmaster TWCS Throttle - hidraw access for Wine/Proton
+   #Thrustmaster TWCS Throttle - hidraw access for Wine/Proton
   SUBSYSTEM=="hidraw", ATTRS{idVendor}=="044f", ATTRS{idProduct}=="b687", MODE="0660", GROUP="input"
 '';
 
   # VR Setup
   security.rtkit.enable = true;
 
-  security.wrappers.vrcompositor-launcher = {
-    owner = "root";
-    group = "root";
-    capabilities = "cap_sys_nice+eip";
-    source = "/home/patsy/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
-  };
+ # security.wrappers.vrcompositor-launcher = {
+   # owner = "root";
+  #  group = "root";
+ #   capabilities = "cap_sys_nice+eip";
+#    source = "/home/patsy/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
+#  };
 
   # Keyboard software
   hardware.ckb-next.enable = true;
