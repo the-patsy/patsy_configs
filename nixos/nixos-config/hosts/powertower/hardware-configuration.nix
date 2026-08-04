@@ -38,9 +38,13 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  swapDevices =
-    [ { device = "/dev/mapper/luks-2d89af70-98d7-4a9a-9f2e-47b5d52f9ae2"; }
-    ];
+  swapDevices = [ {
+    device = "/dev/disk/by-partuuid/89ef31fe-fcf7-4365-855a-56bd801348ed";
+    randomEncryption = {
+      enable = true;
+      allowDiscards = true; # if sda3 is on an SSD; drop this line if it's spinning disk
+      };
+  }  ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
