@@ -61,6 +61,12 @@
     };
   };
 
+  # GTK stuff to make i3 flameshot work
+xdg.portal = {
+  enable = true;
+  extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  config.common.default = [ "gtk" ];
+};
 
   #Firmware updater
   services.fwupd.enable = true;
