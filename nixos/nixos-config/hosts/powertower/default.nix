@@ -30,13 +30,16 @@
 
   # VR Setup
   security.rtkit.enable = true;
-
-  security.wrappers.vrcompositor-launcher = {
-    owner = "root";
-    group = "root";
-    capabilities = "cap_sys_nice+eip";
-    source = "/home/patsy/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
-  };
+  system.activationScripts.steamvr-nice = ''
+  f=/home/patsy/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher
+  [ -f "$f" ] && ${pkgs.libcap}/bin/setcap CAP_SYS_NICE+ep "$f" || true
+'';
+ # security.wrappers.vrcompositor-launcher = {
+ #   owner = "root";
+ #   group = "root";
+ #   capabilities = "cap_sys_nice+eip";
+ #   source = "/home/patsy/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
+ # };
 
   # Keyboard software
   hardware.ckb-next.enable = true;
