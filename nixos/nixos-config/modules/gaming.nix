@@ -6,6 +6,9 @@
     "steam-unwrapped"
   ];
 
+ # Lutris's FHS env still bundles gtk2; allow it until upstream drops it
+  nixpkgs.config.problems.handlers."gtk+".broken = "warn";
+
   programs.steam = {
     enable = true;
     extraCompatPackages = with pkgs; [ proton-ge-bin ];
