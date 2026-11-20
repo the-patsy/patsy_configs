@@ -45,7 +45,16 @@
     extraGroups = [ "networkmanager" "libvirtd" "wheel" "plugdev" ];
   };
 
-  services.printing.enable = true;
+  # Printing things
+  services.avahi = {
+  enable = true;
+  nssmdns = true;
+  openFirewall = true;
+};
+  services.printing = {
+  enable = true;
+  drivers = with pkgs; [ cups-filters ];
+};
 
   fonts.packages = with pkgs; [ nerd-fonts.hack ];
 
@@ -92,7 +101,7 @@ xdg.portal = {
     htop feh mangohud bsdgames xdpyinfo gparted yubikey-manager
     networkmanagerapplet yubioath-flutter usbutils mesa-demos bind
     coreutils wine wine64 vscodium pavucontrol lsof bottles blender
-    discord file
+    discord file 
     (polybar.override { pulseSupport = true; })
   ];
 
