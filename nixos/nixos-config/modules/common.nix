@@ -45,6 +45,8 @@
     extraGroups = [ "networkmanager" "libvirtd" "wheel" "plugdev" ];
   };
 
+  services.printing.enable = true;
+
   fonts.packages = with pkgs; [ nerd-fonts.hack ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
